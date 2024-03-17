@@ -11,6 +11,7 @@
 		7C84C2C02BA7000800642478 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84C2BF2BA7000800642478 /* ContentView.swift */; };
 		7C84C2C22BA7000A00642478 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C84C2C12BA7000A00642478 /* Assets.xcassets */; };
 		7C84C2C52BA7000A00642478 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C84C2C42BA7000A00642478 /* Preview Assets.xcassets */; };
+		7C84C2CC2BA7818000642478 /* testy-betsy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84C2CB2BA7818000642478 /* testy-betsy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		7C84C2BF2BA7000800642478 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7C84C2C12BA7000A00642478 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C84C2C42BA7000A00642478 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7C84C2CB2BA7818000642478 /* testy-betsy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "testy-betsy.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 				7C84C2BF2BA7000800642478 /* ContentView.swift */,
 				7C84C2C12BA7000A00642478 /* Assets.xcassets */,
 				7C84C2C32BA7000A00642478 /* Preview Content */,
+				7C84C2CB2BA7818000642478 /* testy-betsy.swift */,
 			);
 			path = "New Rock Paper Scissors";
 			sourceTree = "<group>";
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C84C2C02BA7000800642478 /* ContentView.swift in Sources */,
+				7C84C2CC2BA7818000642478 /* testy-betsy.swift in Sources */,
 				7C84C2BE2BA7000800642478 /* New_Rock_Paper_ScissorsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
