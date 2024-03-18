@@ -9,97 +9,144 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var rockScissorsPaper = ["rock", "scissors", "paper"].shuffled()
+    @State private var rockScissorsPaper = ["Rock", "Scissors", "Paper"].shuffled()
     var selectedElement: String {self.rockScissorsPaper[0]}
     var winOrLose = ["How to win against... ",
                    "How to lose against..."]
     @State private var win = true
     @State private var score = 0
     @State private var action = "win"
-    @State private var showingScore = false
-//    @State private var choice = ""
-//    @State private var isWrong = false
-//    @State private var isRight = false
+    @State private var nextRound = false
+    @State private var round = 0
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
+    @State private var endgameTitle = ""
+    @State private var endgameMessage = ""
+    @State private var isGameEnded = false
     
     var body: some View {
-        VStack {
-            
-            
-            Text("What will you do to \(action) against...")
-                .font(.headline)
-            Text("\(selectedElement)")
-            
-            HStack {
-                Spacer()
-                ForEach(1..<3) { number in
-                    Spacer()
-                    Button {
-                        didIWin(rockScissorsPaper[number])
-                    } label: {
-                        Text(rockScissorsPaper[number])
-                    }
-                    Spacer()
+        ZStack {
+            VStack {
+                Section {
+                    Text("What will you do to \(action) against...")
+                        .font(.headline)
                 }
-                Spacer()
+
+                Section {
+                    Text("\(selectedElement)")
+                }
+                
+                Section {
+                    HStack {
+                        Spacer()
+                        ForEach(1..<3) { number in
+                            Spacer()
+                            Button {
+                                didIWin(rockScissorsPaper[number])
+                            } label: {
+                                Text(rockScissorsPaper[number])
+                            }
+                            Spacer()
+                        }
+                        Spacer()
+                    }
+                }
             }
-            Text("Your score is \(score)")
+            .alert(alertTitle, isPresented: $nextRound) {
+                Button("Continue", action: askQuestion)
+            } message: {
+                Text(alertMessage)
+            }
+            .alert(endgameTitle, isPresented: $isGameEnded) {
+                Button("Restart game", action: askQuestion)
+            } message: {
+                Text(endgameMessage)
+            }
         }
-        .alert("", isPresented: $showingScore) {
-            Button("Continue", action: askQuestion)
-        } message: {
-            Text("Your score is \(score)")
-        }
+        
     }
     func didIWin(_ number: String) {
         
         if win == true {
-            if selectedElement == "paper" && number == "scissors" {
-                print("scissors cut the paper!")
+            if selectedElement == "Paper" && number == "Scissors" {
+                alertTitle = "Correct!"
+                alertMessage = "Scissors cut the paper!"
                 score += 1
-            } else if selectedElement == "scissors" && number == "rock" {
-                print("rock smashes the scissors")
+            } else if selectedElement == "Scissors" && number == "Rock" {
+                alertTitle = "Correct!"
+                alertMessage = "Rock smashes the scissors"
                 score += 1
-            } else if selectedElement == "rock" && number == "paper" {
-                print("paper wraps around the rock")
+            } else if selectedElement == "Rock" && number == "Paper" {
+                alertTitle = "Correct!"
+                alertMessage = "Paper wraps around the rock"
                 score += 1
             } else {
-                print("Wrong answer!")
+                alertTitle = "Sorry!"
+                alertMessage = "Your answer is not correct"
                 score -= 1
             }
         }
         
         if win == false {
-            if selectedElement == "paper" && number == "scissors" {
-                print("paper loses to scissors")
+            if selectedElement == "Paper" && number == "Scissors" {
+                alertTitle = "Sorry!"
+                alertMessage = "Paper loses to scissors"
                 score -= 1
-            } else if selectedElement == "scissors" && number == "rock" {
-                print("scissors lose to rock")
+            } else if selectedElement == "Scissors" && number == "Rock" {
+                alertTitle = "Sorry!"
+                alertMessage = "Scissors lose to rock"
                 score -= 1
-            } else if selectedElement == "rock" && number == "paper" {
-                print("rock loses to paper")
+            } else if selectedElement == "Rock" && number == "Paper" {
+                alertTitle = "Sorry!"
+                alertMessage = "Rock loses to paper"
                 score -= 1
             } else {
-                print("right answer")
+                alertTitle = "Correct!"
+                alertMessage = "Right answer"
                 score += 1
             }
         }
         
-        showingScore = true
+        nextRound = true
+        
+        if round == 9 {
+            isGameEnded = true
+            nextRound = true
+            if score <= 0 {
+                endgameTitle = "You lost!"
+                endgameMessage = "But don't worry, you can try again!"
+            } else {
+                endgameTitle = "Congrats!"
+                endgameMessage = "You won the game and your score is \(score)! Wanna play again?"
+            }
+        }
         
     }
     
     func askQuestion() {
         win.toggle()
         
+        round += 1
+        
         if win == false {
             action = "lose"
         } else {
             action = "win"
         }
-
+        
+        print(round)
+        
         rockScissorsPaper = rockScissorsPaper.shuffled()
         
         
+    }
+    
+    func restartGame() {
+        if round == 10 {
+            isGameEnded = true
+            score = 0
+            round = 0
+        }
     }
 }
 
